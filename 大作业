@@ -4,50 +4,50 @@
 #include <windows.h>
 #include <mmsystem.h>
 
-typedef struct resident//¶¨Òå½á¹¹Ìå£º´¢´æÓÃ»§ĞÅÏ¢
+typedef struct resident//å®šä¹‰ç»“æ„ä½“ï¼šå‚¨å­˜ç”¨æˆ·ä¿¡æ¯
 {
-    char number[10];//·¿¼äºÅ
-    char name[10];//·¿¿ÍĞÕÃû
-    char sex[10];//·¿¿ÍĞÔ±ğ
-    char num[25];//·¿¿ÍÉí·İÖ¤ºÅ
-    int time1;//¾Ó×¡ÌìÊı
-    struct resident *next;//Á´±íÖ¸ÏòÏÂÒ»½Úµã
+    char number[10];//æˆ¿é—´å·
+    char name[10];//æˆ¿å®¢å§“å
+    char sex[10];//æˆ¿å®¢æ€§åˆ«
+    char num[25];//æˆ¿å®¢èº«ä»½è¯å·
+    int time1;//å±…ä½å¤©æ•°
+    struct resident *next;//é“¾è¡¨æŒ‡å‘ä¸‹ä¸€èŠ‚ç‚¹
 } RDT;
 
-RDT *Input(RDT *head);//½¨Á¢ĞÂÓÃ»§
-RDT *Del(RDT *head,char number[]);//É¾³ıÓÃ»§ĞÅÏ¢
-void Prt(RDT *p);//´òÓ¡Á´±íÊı¾İ
-void Search1(RDT *head,char number[]);//°´·¿¼äºÅËÑË÷
-void Search2(RDT *head,char name[]);//°´ĞÕÃûËÑË÷
-void Search3(RDT *head,char name[]);//Ä£ºıËÑË÷
-int Comfirm(RDT *head,char number[]);//¼ì²âÊÇ·ñ¸Ã·¿¼äÊÇ·ñÒÑÓĞ×¡»§
-void STA(RDT *head);//Í³¼ÆËùÓĞÂ¥²ãµÄ×¡·¿Çé¿ö
-void STO(RDT *head);//½«ÊäÈëµÄÊı¾İ´¢´æÔÚdata.txtÎÄ¼şÖĞ
+RDT *Input(RDT *head);//å»ºç«‹æ–°ç”¨æˆ·
+RDT *Del(RDT *head,char number[]);//åˆ é™¤ç”¨æˆ·ä¿¡æ¯
+void Prt(RDT *p);//æ‰“å°é“¾è¡¨æ•°æ®
+void Search1(RDT *head,char number[]);//æŒ‰æˆ¿é—´å·æœç´¢
+void Search2(RDT *head,char name[]);//æŒ‰å§“åæœç´¢
+void Search3(RDT *head,char name[]);//æ¨¡ç³Šæœç´¢
+int Comfirm(RDT *head,char number[]);//æ£€æµ‹æ˜¯å¦è¯¥æˆ¿é—´æ˜¯å¦å·²æœ‰ä½æˆ·
+void STA(RDT *head);//ç»Ÿè®¡æ‰€æœ‰æ¥¼å±‚çš„ä½æˆ¿æƒ…å†µ
+void STO(RDT *head);//å°†è¾“å…¥çš„æ•°æ®å‚¨å­˜åœ¨data.txtæ–‡ä»¶ä¸­
 
 int main()
 {
     PlaySoundA("hmbb.wav",NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
-    printf(" ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª-----------------------------------");
-    printf("|                                               »¶Ó­½øÈëXXX¾Æµê¹ÜÀíÏµÍ³                                                |");
-    printf(" ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª-----------------------------------");
+    printf(" â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”-----------------------------------");
+    printf("|                                               æ¬¢è¿è¿›å…¥XXXé…’åº—ç®¡ç†ç³»ç»Ÿ                                                |");
+    printf(" â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”-----------------------------------");
     int n;
     RDT *head = NULL;
     char put[10];
     do
     {
-        printf("ÇëÑ¡ÔñÄúÒª½øĞĞµÄ²Ù×÷\n");
-        printf("1¡¢·¿¿ÍĞÅÏ¢Â¼Èë\n");
-        printf("2¡¢ĞÅÏ¢²éÕÒ\n");
-        printf("3¡¢·¿¿ÍÍË·¿\n");
-        printf("4¡¢Êä³öËùÓĞ×¡»§ĞÅÏ¢\n");
-        printf("5¡¢µ±Ç°×¡·¿Çé¿ö\n");
-        printf("6¡¢±£´æµ±Ç°ÊäÈëÊı¾İ\n");
-        printf("0¡¢ÍË³öÏµÍ³\n");
+        printf("è¯·é€‰æ‹©æ‚¨è¦è¿›è¡Œçš„æ“ä½œ\n");
+        printf("1ã€æˆ¿å®¢ä¿¡æ¯å½•å…¥\n");
+        printf("2ã€ä¿¡æ¯æŸ¥æ‰¾\n");
+        printf("3ã€æˆ¿å®¢é€€æˆ¿\n");
+        printf("4ã€è¾“å‡ºæ‰€æœ‰ä½æˆ·ä¿¡æ¯\n");
+        printf("5ã€å½“å‰ä½æˆ¿æƒ…å†µ\n");
+        printf("6ã€ä¿å­˜å½“å‰è¾“å…¥æ•°æ®\n");
+        printf("0ã€é€€å‡ºç³»ç»Ÿ\n");
         scanf("%d",&n);
         while(getchar()!='\n');
         while(n<0||n>6)
         {
-            printf("ÄúµÄÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë\n");
+            printf("æ‚¨çš„è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
             scanf("%d",&n);
             while(getchar()!='\n');
         }
@@ -57,39 +57,39 @@ int main()
             head = Input(head);
             break;
         case 2:
-            printf("ÇëÊäÈëÏëÒªµÄ²éÕÒ·½Ê½£º\n");
-            printf("1¡¢·¿¼äºÅ²éÕÒ\n");
-            printf("2¡¢ĞÕÃû²éÕÒ\n");
-            printf("3¡¢Ä£ºı²éÕÒ\n");
+            printf("è¯·è¾“å…¥æƒ³è¦çš„æŸ¥æ‰¾æ–¹å¼ï¼š\n");
+            printf("1ã€æˆ¿é—´å·æŸ¥æ‰¾\n");
+            printf("2ã€å§“åæŸ¥æ‰¾\n");
+            printf("3ã€æ¨¡ç³ŠæŸ¥æ‰¾\n");
             scanf("%d",&n);
             while(getchar()!='\n');
             while(n<0||n>3)
             {
-                printf("ÄúµÄÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë\n");
+                printf("æ‚¨çš„è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
                 scanf("%d",&n);
                 while(getchar()!='\n');
             }
             switch(n)
             {
             case 1:
-                printf("ÇëÊäÈë·¿¼äºÅ£º");
+                printf("è¯·è¾“å…¥æˆ¿é—´å·ï¼š");
                 gets(put);
                 Search1(head,put);
                 break;
             case 2:
-                printf("ÇëÊäÈëĞÕÃû£º");
+                printf("è¯·è¾“å…¥å§“åï¼š");
                 gets(put);
                 Search2(head,put);
                 break;
             case 3:
-                printf("ÇëÊäÈëĞÅÏ¢£º");
+                printf("è¯·è¾“å…¥ä¿¡æ¯ï¼š");
                 gets(put);
                 Search3(head,put);
                 break;
             }
             break;
         case 3:
-            printf("ÇëÊäÈëÍË·¿µÄ·¿¼äºÅ£º");
+            printf("è¯·è¾“å…¥é€€æˆ¿çš„æˆ¿é—´å·ï¼š");
             gets(put);
             head =Del(head,put);
             break;
@@ -105,11 +105,11 @@ int main()
         }
     }
     while(n!=0);
-    printf("¸ĞĞ»Ê¹ÓÃ±¾ÏµÍ³£¡");
+    printf("æ„Ÿè°¢ä½¿ç”¨æœ¬ç³»ç»Ÿï¼");
     return 0;
 }
 
-RDT *Input(RDT *head)//½¨Á¢ĞÂÓÃ»§
+RDT *Input(RDT *head)//å»ºç«‹æ–°ç”¨æˆ·
 {
     RDT *p = NULL, *pr = head;
     int i,flag,k=0,t=0;
@@ -117,7 +117,7 @@ RDT *Input(RDT *head)//½¨Á¢ĞÂÓÃ»§
     p = (RDT *)malloc(sizeof(RDT));
     if(p==NULL)
     {
-        printf("ÄÚ´æ²»¹»À±£¡\n");
+        printf("å†…å­˜ä¸å¤Ÿè¾£ï¼\n");
         exit(0);
 
     }
@@ -136,13 +136,13 @@ RDT *Input(RDT *head)//½¨Á¢ĞÂÓÃ»§
     do
     {
         for (unsigned int q = 0; q < strlen(p->number); q++)
-            p->number[q] = '\0' ;                            //forÑ­»·Çå¿ÕÊı×é
-        printf("ÇëÊäÈë·¿¼äºÅ(5ÒÔÄÚÊı×Ö¿ªÍ·£¬ÈıÎ»Êı):");
+            p->number[q] = '\0' ;                            //forå¾ªç¯æ¸…ç©ºæ•°ç»„
+        printf("è¯·è¾“å…¥æˆ¿é—´å·(5ä»¥å†…æ•°å­—å¼€å¤´ï¼Œä¸‰ä½æ•°):");
         scanf("%s",number);
         t=strlen(number);
         if(t!=3)
         {
-            printf("ÇëÊäÈëÕıÈ·µÄ·¿¼äºÅ£º!!!!!!!!!!!!!!!!!!!!!!!\n");
+            printf("è¯·è¾“å…¥æ­£ç¡®çš„æˆ¿é—´å·ï¼š!!!!!!!!!!!!!!!!!!!!!!!\n");
             continue;
         }
         if(number[0]-'0'<0||number[0]-'0'>5)
@@ -157,30 +157,30 @@ RDT *Input(RDT *head)//½¨Á¢ĞÂÓÃ»§
             }
             if(t!=3)
             {
-                printf("ÇëÊäÈëÕıÈ·µÄ·¿¼äºÅ£º!!!!!!!!!!!!!!!!!!!!!!!\n");
+                printf("è¯·è¾“å…¥æ­£ç¡®çš„æˆ¿é—´å·ï¼š!!!!!!!!!!!!!!!!!!!!!!!\n");
                 break;
             }
         }
         k = Comfirm(head,number);
         if(k==1)
         {
-            printf("¸Ã·¿¼äÒÑÈë×¡\n");
+            printf("è¯¥æˆ¿é—´å·²å…¥ä½\n");
             continue;
         }
         strcpy(p->number,number);
     }
     while(k==1||t!=3);
     while(getchar()!='\n');
-    printf("ÇëÊäÈë·¿¿ÍĞÕÃû£º");
+    printf("è¯·è¾“å…¥æˆ¿å®¢å§“åï¼š");
     scanf("%s",p->name);
     while(getchar()!='\n');
-    printf("ÇëÊäÈë·¿¿ÍĞÔ±ğ£º");
+    printf("è¯·è¾“å…¥æˆ¿å®¢æ€§åˆ«ï¼š");
     scanf("%s",p->sex);
     while(getchar()!='\n');
     do
     {
         flag = 0;
-        printf("ÇëÊäÈë·¿¿ÍÉí·İÖ¤ºÅ(18Î»Êı×Ö)£º");
+        printf("è¯·è¾“å…¥æˆ¿å®¢èº«ä»½è¯å·(18ä½æ•°å­—)ï¼š");
         scanf("%s",p->num);
         while(getchar()!='\n');
         for(i=0; p->num[i]!='\0'; i++)
@@ -194,30 +194,30 @@ RDT *Input(RDT *head)//½¨Á¢ĞÂÓÃ»§
         if (i!=18)
         {
             flag = 1;
-            printf("ÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë");
+            printf("è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥");
         }
     }
     while (flag!=0);
     do
     {
-        printf("ÇëÊäÈë¶©·¿ÌìÊı£º");
+        printf("è¯·è¾“å…¥è®¢æˆ¿å¤©æ•°ï¼š");
         scanf("%d",&p->time1);
         while(getchar()!='\n');
-        if(p->time1==0)     printf("ÄúµÄÊäÈëÓĞÎó£¡\n");
+        if(p->time1==0)     printf("æ‚¨çš„è¾“å…¥æœ‰è¯¯ï¼\n");
     }
     while(p->time1==0);
     p->next = NULL;
-    printf("¿ª·¿³É¹¦£¡(*£ş3£ş)¨q\n");
+    printf("å¼€æˆ¿æˆåŠŸï¼(*ï¿£3ï¿£)â•­\n");
     return head;
 }
 
-RDT *Del(RDT *head,char number[])//É¾³ıÓÃ»§ĞÅÏ¢
+RDT *Del(RDT *head,char number[])//åˆ é™¤ç”¨æˆ·ä¿¡æ¯
 {
     RDT *pr = head,*p = head;
     int k=0;
     if(head == NULL)
     {
-        printf("Ê²Ã´Ò²Ã»ÓĞÄÅ£¿\n\n\n");
+        printf("ä»€ä¹ˆä¹Ÿæ²¡æœ‰å‘ï¼Ÿ\n\n\n");
         return head;
     }
     while(strcmp(number,pr->number)!=0&&pr->next==NULL)
@@ -236,15 +236,15 @@ RDT *Del(RDT *head,char number[])//É¾³ıÓÃ»§ĞÅÏ¢
         k++;
     }
     free(pr);
-    printf("ÍË·¿³É¹¦\n\n");
-    if (k==0)   printf("´Ë·¿Îª¿Õ£¬ÎŞ·¨²Ù×÷\n\n\n");
+    printf("é€€æˆ¿æˆåŠŸ\n\n");
+    if (k==0)   printf("æ­¤æˆ¿ä¸ºç©ºï¼Œæ— æ³•æ“ä½œ\n\n\n");
     return head;
 }
 
-void Prt(RDT *head)//´òÓ¡Á´±í
+void Prt(RDT *head)//æ‰“å°é“¾è¡¨
 {
     RDT *pr = head;
-    printf("·¿¼äºÅ    ·¿¿ÍÃû        ĞÔ±ğ                 Éí·İÖ¤ºÅ         ¾Ó×¡ÌìÊı       \n");
+    printf("æˆ¿é—´å·    æˆ¿å®¢å        æ€§åˆ«                 èº«ä»½è¯å·         å±…ä½å¤©æ•°       \n");
     do
     {
 
@@ -254,11 +254,11 @@ void Prt(RDT *head)//´òÓ¡Á´±í
     while (pr!=NULL);
 }
 
-void Search1(RDT *head,char number[])//°´·¿¼äºÅËÑË÷
+void Search1(RDT *head,char number[])//æŒ‰æˆ¿é—´å·æœç´¢
 {
     RDT *pr = head;
     int k=0;
-    printf("·¿¼äºÅ    ·¿¿ÍÃû        ĞÔ±ğ                 Éí·İÖ¤ºÅ         ¾Ó×¡ÌìÊı       \n");
+    printf("æˆ¿é—´å·    æˆ¿å®¢å        æ€§åˆ«                 èº«ä»½è¯å·         å±…ä½å¤©æ•°       \n");
     do
     {
         if (strcmp(pr->number,number)==0)
@@ -270,14 +270,14 @@ void Search1(RDT *head,char number[])//°´·¿¼äºÅËÑË÷
         pr = pr->next;
     }
     while(pr!=NULL);
-    if (k==0)   printf("Not Found£¡\n");
+    if (k==0)   printf("Not Foundï¼\n");
 }
 
-void Search2(RDT *head,char name[])//°´ĞÕÃûËÑË÷
+void Search2(RDT *head,char name[])//æŒ‰å§“åæœç´¢
 {
     RDT *pr = head;
     int k=0;
-    printf("·¿¼äºÅ    ·¿¿ÍÃû        ĞÔ±ğ                 Éí·İÖ¤ºÅ         ¾Ó×¡ÌìÊı       \n");
+    printf("æˆ¿é—´å·    æˆ¿å®¢å        æ€§åˆ«                 èº«ä»½è¯å·         å±…ä½å¤©æ•°       \n");
     do
     {
         if (strcmp(pr->name,name)==0)
@@ -289,10 +289,10 @@ void Search2(RDT *head,char name[])//°´ĞÕÃûËÑË÷
         pr = pr->next;
     }
     while(pr!=NULL);
-    if (k==0)   printf("Not Found£¡\n");
+    if (k==0)   printf("Not Foundï¼\n");
 }
 
-int Comfirm(RDT *head,char number[])//¼ì²âÊÇ·ñ¸Ã·¿¼äÊÇ·ñÒÑÓĞ×¡»§
+int Comfirm(RDT *head,char number[])//æ£€æµ‹æ˜¯å¦è¯¥æˆ¿é—´æ˜¯å¦å·²æœ‰ä½æˆ·
 {
     RDT *pr = head;
     do
@@ -307,7 +307,7 @@ int Comfirm(RDT *head,char number[])//¼ì²âÊÇ·ñ¸Ã·¿¼äÊÇ·ñÒÑÓĞ×¡»§
     return 0;
 }
 
-void Search3(RDT *head,char name[])//Ä£ºıËÑË÷
+void Search3(RDT *head,char name[])//æ¨¡ç³Šæœç´¢
 {
     char str[10];
     RDT *pr = head;
@@ -315,14 +315,14 @@ void Search3(RDT *head,char name[])//Ä£ºıËÑË÷
     printf("%d",k);
     do
     {
-        for(i=0; pr->name[i+k-1]!='\0'; i++) //·´¸´½«¼ì²éµãºóÒÆ
+        for(i=0; pr->name[i+k-1]!='\0'; i++) //åå¤å°†æ£€æŸ¥ç‚¹åç§»
         {
-            for(j=0; j<k; j++) //½«ÏàÍ¬³¤¶ÈµÄ×Ö·û´®´Ópr->nameÖĞÈ¡³ö£¬·ÅÔÚstr[]ÖĞ
+            for(j=0; j<k; j++) //å°†ç›¸åŒé•¿åº¦çš„å­—ç¬¦ä¸²ä»pr->nameä¸­å–å‡ºï¼Œæ”¾åœ¨str[]ä¸­
             {
                 str[j] = pr->name[i+j];
             }
             str[j] = '\0';
-            if(strcmp(str,name)==0)//Èç¹û×Ö·û´®Íê³ÉÆ¥Åä£¬Êä³ö¸ÃĞĞÊı¾İ£¬²¢½øĞĞÏÂÒ»Ñ­»·
+            if(strcmp(str,name)==0)//å¦‚æœå­—ç¬¦ä¸²å®ŒæˆåŒ¹é…ï¼Œè¾“å‡ºè¯¥è¡Œæ•°æ®ï¼Œå¹¶è¿›è¡Œä¸‹ä¸€å¾ªç¯
             {
                 sum++;
                 printf("%5s%10s%3s%30s%3d\n",pr->number,pr->name,pr->sex,pr->num,pr->time1);
@@ -335,14 +335,14 @@ void Search3(RDT *head,char name[])//Ä£ºıËÑË÷
     if(sum==0)      printf("Not Found!");
 }
 
-void STA(RDT *head)//Í³¼ÆËùÓĞÂ¥²ãµÄ×¡·¿Çé¿ö
+void STA(RDT *head)//ç»Ÿè®¡æ‰€æœ‰æ¥¼å±‚çš„ä½æˆ¿æƒ…å†µ
 {
     int i,sum=0;
     RDT *pr = NULL;
-    printf("·¿¼äºÅ    ·¿¿ÍÃû        ĞÔ±ğ                 Éí·İÖ¤ºÅ         ¾Ó×¡ÌìÊı       \n");
+    printf("æˆ¿é—´å·    æˆ¿å®¢å        æ€§åˆ«                 èº«ä»½è¯å·         å±…ä½å¤©æ•°       \n");
     for(i=0,pr = head; i<5; i++)
     {
-        printf("µÚ%d²ãµÄ×¡»§£º\n",i+1);
+        printf("ç¬¬%då±‚çš„ä½æˆ·ï¼š\n",i+1);
         do
         {
             if((pr->number[0] - '0')==i+1)
@@ -353,21 +353,21 @@ void STA(RDT *head)//Í³¼ÆËùÓĞÂ¥²ãµÄ×¡·¿Çé¿ö
             pr = pr->next;
         }
         while(pr!=NULL);
-        if(sum==0)      printf("ÎŞ\n");
+        if(sum==0)      printf("æ— \n");
         pr = head;
         sum = 0;
     }
     return;
 }
 
-void STO(RDT *head)//½øĞĞÎÄ¼şÊä³ö
+void STO(RDT *head)//è¿›è¡Œæ–‡ä»¶è¾“å‡º
 {
     FILE *fp;
     RDT *pr=head;
     fp = fopen("data.txt","a+");
     if(fp==NULL)
     {
-        printf("ÎÄ¼ş´ò¿ªÊ§°Ü£¡\n");
+        printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥ï¼\n");
         exit(0);
     }
     do
@@ -377,7 +377,7 @@ void STO(RDT *head)//½øĞĞÎÄ¼şÊä³ö
         pr = pr->next;
     }
     while(pr!=NULL);
-    printf("±£´æ³É¹¦£¡\n");
+    printf("ä¿å­˜æˆåŠŸï¼\n");
     fclose(fp);
     return;
 }
